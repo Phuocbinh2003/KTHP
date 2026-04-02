@@ -7,7 +7,8 @@ import pickle
 df = pd.read_csv("data/recipes.csv")
 
 # Chọn feature dinh dưỡng (có thể chỉnh lại)
-features = ['calories', 'fat', 'protein', 'carbs']
+features = ['Calories', 'FatContent', 'ProteinContent', 'CarbohydrateContent','SugarContent','SodiumContent']
+  
 df = df.dropna(subset=features)
 
 X = df[features]
