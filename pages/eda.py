@@ -38,3 +38,5 @@ def show_eda(df):
     - Calories và fat có tương quan cao  
     - Cần chuẩn hóa trước khi clustering  
     """)
+if __name__ == "__main__":
+    show_eda()
