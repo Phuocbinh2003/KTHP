@@ -2,7 +2,7 @@ import streamlit as st
 from side1 import sidebar_navigation
 from utils.loader import load_data, load_model
 
-from pages.eda import show_eda
+from pages.eda.py import show_eda
 from pages.recommend import show_recommend
 from pages.evaluation import show_evaluation
 
