@@ -1,5 +1,5 @@
 import streamlit as st
-from side1 import sidebar_navigation
+
 from utils.loader import load_data, load_model
 
 from pages.eda import show_eda
