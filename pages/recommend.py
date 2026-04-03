@@ -2,25 +2,25 @@ import streamlit as st
 from sklearn.metrics.pairwise import euclidean_distances
 import pandas as pd
 import re
-
-def show_recommend(df, kmeans, scaler):
-    def extract_image_url(img_field):
-       if pd.isna(img_field):
-           return None
-               
-       img_str = str(img_field)
-               
-                   # Trường hợp dạng c("url1","url2")
-       if img_str.startswith("c("):
-           urls = re.findall(r'https?://[^"]+', img_str)
-           return urls[0] if urls else None
-               
-                   # Trường hợp dạng string thường
-       elif "http" in img_str:
-           urls = re.findall(r'https?://[^"]+', img_str)
-           return urls[0] if urls else None
-  
+def extract_image_url(img_field):
+    if pd.isna(img_field):
         return None
+
+    img_str = str(img_field)
+
+    # Trường hợp dạng c("url1","url2")
+    if img_str.startswith("c("):
+        urls = re.findall(r'https?://[^"]+', img_str)
+        return urls[0] if urls else None
+
+    # Trường hợp dạng string thường
+    elif "http" in img_str:
+        urls = re.findall(r'https?://[^"]+', img_str)
+        return urls[0] if urls else None
+
+    return None
+def show_recommend(df, kmeans, scaler):
+    
     st.title("🥗 Gợi ý thực đơn")
 
     # ======================
