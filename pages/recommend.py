@@ -58,7 +58,7 @@ def show_recommend(df, kmeans, scaler):
         # ======================
         # SORT THEO DISTANCE (QUAN TRỌNG)
         # ======================
-        features = ['Calories','FatContent','ProteinContent','CarbohydrateContent','SugarContent','SodiumContent']
+        features = ['Calories','FatContent','CarbohydrateContent','ProteinContent','SugarContent','SodiumContent']
 
         X = result[features]
         X_scaled = scaler.transform(X)
