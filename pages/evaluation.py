@@ -71,7 +71,7 @@ def show_evaluation(df, scaler, kmeans):
     # NHẬN XÉT
     # ======================
     st.markdown("""
-    ### 🧠 Nhận xét
+    ### 🧠 Nhận xét x
     - Dữ liệu gốc có 6 chiều → sử dụng PCA để giảm xuống 3D
     - Các cụm được phân tách tương đối rõ ràng
     - Silhouette Score phản ánh chất lượng phân cụm
