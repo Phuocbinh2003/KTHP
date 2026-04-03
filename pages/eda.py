@@ -15,7 +15,7 @@ def show_eda(df):
     ---
     ### 🎯 Mục tiêu
     Xây dựng hệ thống gợi ý thực đơn dựa trên:
-    - Chỉ số cơ thể (BMI)
+    - Chỉ số cơ thể (BMI).
     - Bệnh lý nền (Tiểu đường, Cao huyết áp)
 
     ### 💡 Giá trị thực tiễn
