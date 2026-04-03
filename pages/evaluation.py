@@ -6,7 +6,6 @@ import plotly.express as px
 
 
 def show_evaluation(df, scaler, kmeans):
-
     st.title("📊 Đánh giá mô hình KMeans")
 
     # ======================
