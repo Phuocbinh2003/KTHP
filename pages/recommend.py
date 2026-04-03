@@ -30,13 +30,12 @@ def show_recommend(df, kmeans, scaler):
 
         # Mapping BMI → vector dinh dưỡng (quan trọng)
         if bmi > 25:
-            user_vector = [[1500, 20, 150, 80]]   # giảm cân
+            user_vector = [[1500, 20, 80, 150, 20, 400]]
         elif bmi < 18.5:
-            user_vector = [[2500, 60, 300, 100]]  # tăng cân
+            user_vector = [[2500, 60, 100, 300, 40, 800]]
         else:
-            user_vector = [[2000, 40, 250, 90]]   # bình thường
-
-        # Predict cluster
+            user_vector = [[2000, 40, 90, 250, 30, 600]]
+                # Predict cluster
         user_scaled = scaler.transform(user_vector)
         cluster = kmeans.predict(user_scaled)[0]
 
