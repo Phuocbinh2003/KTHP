@@ -1,6 +1,7 @@
 import streamlit as st
 from sklearn.metrics.pairwise import euclidean_distances
- 
+import pandas as pd
+import re
 
 def show_recommend(df, kmeans, scaler):
     def extract_image_url(img_field):
@@ -18,6 +19,8 @@ def show_recommend(df, kmeans, scaler):
        elif "http" in img_str:
            urls = re.findall(r'https?://[^"]+', img_str)
            return urls[0] if urls else None
+  
+        return None
     st.title("🥗 Gợi ý thực đơn")
 
     # ======================
@@ -132,11 +135,7 @@ def show_recommend(df, kmeans, scaler):
             # ======================
             # 🖼️ HÌNH ẢNH
             # ======================
-            import pandas as pd
-            import re
            
-            
-                return None
             with col2:
                 img_url = extract_image_url(row['Images'])
 
