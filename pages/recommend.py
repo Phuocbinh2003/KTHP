@@ -2,23 +2,19 @@ import streamlit as st
 from sklearn.metrics.pairwise import euclidean_distances
 import pandas as pd
 import re
+import random
+
+
 def extract_image_url(img_field):
     if pd.isna(img_field):
         return None
 
-    img_str = str(img_field)
+    urls = re.findall(r'https?://[^"]+', str(img_field))
 
-    # Trường hợp dạng c("url1","url2")
-    if img_str.startswith("c("):
-        urls = re.findall(r'https?://[^"]+', img_str)
-        return urls[0] if urls else None
+    if not urls:
+        return None
 
-    # Trường hợp dạng string thường
-    elif "http" in img_str:
-        urls = re.findall(r'https?://[^"]+', img_str)
-        return urls[0] if urls else None
-
-    return None
+    return random.choice(urls)  # 🎯 random ảnh
 def show_recommend(df, kmeans, scaler):
     
     st.title("🥗 Gợi ý thực đơn")
