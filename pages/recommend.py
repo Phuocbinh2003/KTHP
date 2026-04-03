@@ -75,8 +75,59 @@ def show_recommend(df, kmeans, scaler):
         # ======================
         st.success(f"👉 Gợi ý {len(result)} món phù hợp (đã xếp hạng)")
 
-        st.dataframe(
-            result[['Name','Calories','FatContent','ProteinContent',
-                    'CarbohydrateContent','SugarContent','SodiumContent']]
-            .head(10)
-        )
+        import matplotlib.pyplot as plt
+
+        top_n = result.head(5)  # lấy 5 món đẹp hơn
+        
+        for i, row in top_n.iterrows():
+        
+            st.markdown("---")
+        
+            # 📝 TÊN MÓN
+            st.subheader(f"🍽️ {row['Name']}")
+        
+            col1, col2 = st.columns([1, 1])
+        
+            # ======================
+            # 🥧 BIỂU ĐỒ TRÒN
+            # ======================
+            with col1:
+                labels = [
+                    'Calories', 'Fat', 'Protein',
+                    'Carbs', 'Sugar', 'Sodium'
+                ]
+        
+                values = [
+                    row['Calories'],
+                    row['FatContent'],
+                    row['ProteinContent'],
+                    row['CarbohydrateContent'],
+                    row['SugarContent'],
+                    row['SodiumContent']
+                ]
+        
+                fig, ax = plt.subplots()
+                ax.pie(values, labels=labels, autopct='%1.1f%%')
+                ax.set_title("Tỷ lệ dinh dưỡng")
+        
+                st.pyplot(fig)
+        
+            # ======================
+            # 🖼️ HÌNH ẢNH
+            # ======================
+            with col2:
+                if 'Images' in row and pd.notna(row['Images']):
+                    try:
+                        # Images thường là string list → xử lý nhanh
+                        img_url = str(row['Images']).strip("[]").replace("'", "").split(",")[0]
+                        st.image(img_url, use_container_width=True)
+                    except:
+                        st.write("Không có ảnh")
+                else:
+                    st.write("Không có ảnh")
+        
+            # ======================
+            # 📊 INFO NHANH
+            # ======================
+            st.write(f"🔥 Calories: {row['Calories']}")
+            st.write(f"🥩 Protein: {row['ProteinContent']}")
