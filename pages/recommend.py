@@ -8,7 +8,6 @@ import random
 def extract_image_url(img_field):
     if pd.isna(img_field):
         return None
-
     urls = re.findall(r'https?://[^"]+', str(img_field))
 
     if not urls:
