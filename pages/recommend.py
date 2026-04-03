@@ -44,13 +44,16 @@ def show_recommend(df, kmeans, scaler):
     # ======================
     if st.button("Gợi ý món ăn"):
 
-        # Mapping BMI → vector dinh dưỡng (6 features)
-        if bmi > 25:
-            user_vector = [[1500, 20, 80, 150, 20, 400]]
-        elif bmi < 18.5:
-            user_vector = [[2500, 60, 100, 300, 40, 800]]
-        else:
-            user_vector = [[2000, 40, 90, 250, 30, 600]]
+       calories = 2000 + (bmi - 22) * 80
+
+        fat = calories * 0.25 / 9
+        protein = calories * 0.2 / 4
+        carbs = calories * 0.5 / 4
+        
+        sugar = carbs * 0.2
+        sodium = 500 + (bmi - 22) * 20
+        
+        user_vector = [[calories, fat, protein, carbs, sugar, sodium]]
 
         # Scale + predict cluster
         user_scaled = scaler.transform(user_vector)
