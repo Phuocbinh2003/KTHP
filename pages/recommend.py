@@ -46,12 +46,12 @@ def show_recommend(df, kmeans, scaler):
         # FILTER BỆNH
         # ======================
         if disease == "Tiểu đường":
-            result = result[result['carbs'] < 50]
-            result = result[result['sugar'] < 20]
+            result = result[result['CarbohydrateContent'] < 50]
+            result = result[result['SugarContent'] < 20]
 
         elif disease == "Cao huyết áp":
-            result = result[result['fat'] < 20]
-            result = result[result['sodium'] < 500]
+            result = result[result['FatContent'] < 20]
+            result = result[result['SodiumContent'] < 500]
 
         st.success(f"👉 Gợi ý {len(result)} món phù hợp")
 
