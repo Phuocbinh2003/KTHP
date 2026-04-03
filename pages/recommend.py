@@ -24,7 +24,21 @@ def show_recommend(df, kmeans, scaler):
     # ======================
     weight = st.number_input("Nhập cân nặng (kg)", 30.0, 150.0, 60.0)
     height = st.number_input("Nhập chiều cao (cm)", 100.0, 220.0, 170.0)
+    age = st.number_input("Tuổi", 10, 80, 22)
 
+    gender = st.selectbox("Giới tính", ["Nam", "Nữ"])
+    
+    activity = st.selectbox("Mức vận động", [
+        "Ít vận động",
+        "Trung bình",
+        "Nhiều"
+    ])
+    
+    goal = st.selectbox("Mục tiêu", [
+        "Giảm cân",
+        "Giữ dáng",
+        "Tăng cân"
+    ])
     disease = st.selectbox("Chọn tình trạng", [
         "Bình thường",
         "Tiểu đường",
@@ -42,25 +56,49 @@ def show_recommend(df, kmeans, scaler):
     # ======================
     # GỢI Ý
     # ======================
-    if st.button("Gợi ý món ăn"):
-
-      
+   if st.button("Gợi ý món ăn"):
 
         # ======================
-        # TÍNH DINH DƯỠNG TỪ BMI
+        # BMR
         # ======================
-        calories = 2000 + (bmi - 22) * 80
+        if gender == "Nam":
+            bmr = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)
+        else:
+            bmr = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)
     
-        # chặn giá trị hợp lý
+        # ======================
+        # ACTIVITY
+        # ======================
+        activity_map = {
+            "Ít vận động": 1.2,
+            "Trung bình": 1.55,
+            "Nhiều": 1.9
+        }
+    
+        tdee = bmr * activity_map[activity]
+    
+        # ======================
+        # GOAL
+        # ======================
+        if goal == "Giảm cân":
+            calories = tdee - 500
+        elif goal == "Tăng cân":
+            calories = tdee + 500
+        else:
+            calories = tdee
+    
+        # ✅ chặn giá trị hợp lý
         calories = max(1200, min(3500, calories))
     
+        # ======================
+        # DINH DƯỠNG
+        # ======================
         fat = calories * 0.25 / 9
         protein = calories * 0.2 / 4
         carbs = calories * 0.5 / 4
     
         sugar = carbs * 0.2
-        sodium = 500 + (bmi - 22) * 20
-        sodium = max(200, sodium)
+        sodium = 500
     
         user_vector = [[calories, fat, protein, carbs, sugar, sodium]]
     
