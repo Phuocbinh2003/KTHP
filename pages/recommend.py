@@ -56,6 +56,6 @@ def show_recommend(df, kmeans, scaler):
         st.success(f"👉 Gợi ý {len(result)} món phù hợp")
 
         st.dataframe(
-            result[['name','calories','fat','protein','carbs']].head(10)
+            result[['Calories','FatContent','ProteinContent','CarbohydrateContent','SugarContent','SodiumContent']].head(10)
         )
         
