@@ -7,13 +7,13 @@ def show_evaluation(df, scaler, kmeans):
     st.title("📊 Đánh giá KMeans")
 
     features = [
-        'Calories',
-        'FatContent',
-        'ProteinContent',
-        'CarbohydrateContent',
-        'SugarContent',
-        'SodiumContent'
-    ]
+    'Calories',
+    'FatContent',
+    'CarbohydrateContent',
+    'ProteinContent',
+    'SugarContent',
+    'SodiumContent'
+]
 
     X = df[features].dropna()
 
