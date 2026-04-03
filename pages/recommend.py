@@ -1,6 +1,21 @@
 import streamlit as st
 from sklearn.metrics.pairwise import euclidean_distances
-
+ 
+def extract_image_url(img_field):
+    if pd.isna(img_field):
+        return None
+            
+    img_str = str(img_field)
+            
+                # Trường hợp dạng c("url1","url2")
+    if img_str.startswith("c("):
+        urls = re.findall(r'https?://[^"]+', img_str)
+        return urls[0] if urls else None
+            
+                # Trường hợp dạng string thường
+    elif "http" in img_str:
+        urls = re.findall(r'https?://[^"]+', img_str)
+        return urls[0] if urls else None
 def show_recommend(df, kmeans, scaler):
     st.title("🥗 Gợi ý thực đơn")
 
@@ -116,14 +131,16 @@ def show_recommend(df, kmeans, scaler):
             # ======================
             # 🖼️ HÌNH ẢNH
             # ======================
+            import pandas as pd
+            import re
+           
+            
+                return None
             with col2:
-                if 'Images' in row and pd.notna(row['Images']):
-                    try:
-                        # Images thường là string list → xử lý nhanh
-                        img_url = str(row['Images']).strip("[]").replace("'", "").split(",")[0]
-                        st.image(img_url, use_container_width=True)
-                    except:
-                        st.write("Không có ảnh")
+                img_url = extract_image_url(row['Images'])
+
+                if img_url:
+                    st.image(img_url, use_container_width=True)
                 else:
                     st.write("Không có ảnh")
         
