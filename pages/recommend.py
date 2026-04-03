@@ -44,21 +44,32 @@ def show_recommend(df, kmeans, scaler):
     # ======================
     if st.button("Gợi ý món ăn"):
 
-       calories = 2000 + (bmi - 22) * 80
+      
 
+        # ======================
+        # TÍNH DINH DƯỠNG TỪ BMI
+        # ======================
+        calories = 2000 + (bmi - 22) * 80
+    
+        # chặn giá trị hợp lý
+        calories = max(1200, min(3500, calories))
+    
         fat = calories * 0.25 / 9
         protein = calories * 0.2 / 4
         carbs = calories * 0.5 / 4
-        
+    
         sugar = carbs * 0.2
         sodium = 500 + (bmi - 22) * 20
-        
+        sodium = max(200, sodium)
+    
         user_vector = [[calories, fat, protein, carbs, sugar, sodium]]
-
-        # Scale + predict cluster
+    
+        # ======================
+        # MODEL
+        # ======================
         user_scaled = scaler.transform(user_vector)
         cluster = kmeans.predict(user_scaled)[0]
-
+    
         df['cluster'] = kmeans.labels_
         result = df[df['cluster'] == cluster].copy()
 
