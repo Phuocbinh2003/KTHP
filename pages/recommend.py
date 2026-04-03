@@ -60,24 +60,27 @@ def show_recommend(df, kmeans, scaler):
         # ======================
         # BMR
         # ======================
+        # ======================
+        # BMR
+        # ======================
         if gender == "Nam":
             bmr = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)
         else:
             bmr = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)
-    
+        
         # ======================
-        # ACTIVITY
+        # Activity
         # ======================
         activity_map = {
             "Ít vận động": 1.2,
             "Trung bình": 1.55,
             "Nhiều": 1.9
         }
-    
+        
         tdee = bmr * activity_map[activity]
-    
+        
         # ======================
-        # GOAL
+        # Goal (QUAN TRỌNG)
         # ======================
         if goal == "Giảm cân":
             calories = tdee - 500
@@ -85,20 +88,22 @@ def show_recommend(df, kmeans, scaler):
             calories = tdee + 500
         else:
             calories = tdee
-    
-        # ✅ chặn giá trị hợp lý
-        calories = max(1200, min(3500, calories))
-    
+        
         # ======================
-        # DINH DƯỠNG
+        # Clamp (giới hạn hợp lý)
+        # ======================
+        calories = max(1200, min(3500, calories))
+        
+        # ======================
+        # Macro
         # ======================
         fat = calories * 0.25 / 9
         protein = calories * 0.2 / 4
         carbs = calories * 0.5 / 4
-    
+        
         sugar = carbs * 0.2
-        sodium = 500
-    
+        sodium = max(200, 500 + (bmi - 22) * 20)
+        
         user_vector = [[calories, fat, protein, carbs, sugar, sodium]]
     
         # ======================
