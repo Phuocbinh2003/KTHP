@@ -23,7 +23,7 @@ def show_eda(df):
     st.subheader("📈 Phân phối Calories")
 
     fig, ax = plt.subplots()
-    df['calories'].hist(ax=ax)
+    df['Calories'].hist(ax=ax)
     st.pyplot(fig)
 
     st.subheader("📊 Ma trận tương quan")
