@@ -29,7 +29,7 @@ def show_eda(df):
     st.subheader("📊 Ma trận tương quan")
 
     fig, ax = plt.subplots()
-    sns.heatmap(df[['calories','fat','protein','carbs']].corr(), annot=True, ax=ax)
+    sns.heatmap(df[['Calories','FatContent','ProteinContent','CarbohydrateContent','SugarContent','SodiumContent']].corr(), annot=True, ax=ax)
     st.pyplot(fig)
 
     st.markdown("""
