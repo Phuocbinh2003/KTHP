@@ -1,78 +1,89 @@
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import streamlit as st
+import pandas as pd
+from sklearn.metrics import silhouette_score
+from sklearn.decomposition import PCA
+import plotly.express as px
+
+
 def show_evaluation(df, scaler, kmeans):
 
-    st.title("📊 Đánh giá KMeans")
+    st.title("📊 Đánh giá mô hình KMeans")
 
+    # ======================
+    # FEATURES (PHẢI ĐÚNG NHƯ LÚC TRAIN)
+    # ======================
     features = [
-    'Calories',
-    'FatContent',
-    'CarbohydrateContent',
-    'ProteinContent',
-    'SugarContent',
-    'SodiumContent'
-]
+        'Calories',
+        'FatContent',
+        'CarbohydrateContent',
+        'ProteinContent',
+        
+        'SugarContent',
+        'SodiumContent'
+    ]
 
+    # ======================
+    # DATA
+    # ======================
     X = df[features].dropna()
 
-    # scale
-    X_scaled = scaler.transform(X)
+    # ❗ FIX lỗi feature name
+    X_scaled = scaler.transform(X.values)
 
     # predict cluster
     labels = kmeans.predict(X_scaled)
 
     # ======================
-    # SILHOUETTE
+    # METRIC
     # ======================
-    from sklearn.metrics import silhouette_score
     score = silhouette_score(X_scaled, labels)
 
-    st.metric("Silhouette Score", round(score, 3))
+    st.metric("📈 Silhouette Score", round(score, 3))
 
     # ======================
-    # PCA 3D
+    # PCA → 3D
     # ======================
-    st.subheader("🌐 Visualization 3D (PCA)")
+    st.subheader("🌐 Visualization 3D (Interactive)")
 
     pca = PCA(n_components=3)
     X_pca = pca.fit_transform(X_scaled)
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-
-    scatter = ax.scatter(
-        X_pca[:, 0],
-        X_pca[:, 1],
-        X_pca[:, 2],
-        c=labels
+    # ======================
+    # PLOTLY 3D
+    # ======================
+    fig = px.scatter_3d(
+        x=X_pca[:, 0],
+        y=X_pca[:, 1],
+        z=X_pca[:, 2],
+        color=labels.astype(str),
+        hover_name=df.loc[X.index, 'Name'],  # hiển thị tên món
+        title="KMeans Clustering (3D Interactive)"
     )
 
-    ax.set_xlabel("PC1")
-    ax.set_ylabel("PC2")
-    ax.set_zlabel("PC3")
-    ax.set_title("KMeans Clustering (3D PCA)")
-
-    st.pyplot(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
     # ======================
-    # GIẢI THÍCH
+    # EXPLAINED VARIANCE
+    # ======================
+    st.write("📊 Explained Variance (PCA):")
+    st.write(pca.explained_variance_ratio_)
+
+    # ======================
+    # NHẬN XÉT
     # ======================
     st.markdown("""
     ### 🧠 Nhận xét
-    - Dữ liệu gốc có 6 chiều nên sử dụng PCA để giảm về 3D
-    - Các cụm có sự tách biệt tương đối rõ
-    """)
+    - Dữ liệu gốc có 6 chiều → sử dụng PCA để giảm xuống 3D
+    - Các cụm được phân tách tương đối rõ ràng
+    - Silhouette Score phản ánh chất lượng phân cụm
 
-    st.markdown("""
     ### ⚠️ Hạn chế
     - PCA làm mất một phần thông tin
-    - KMeans phụ thuộc số cụm K
-    """)
+    - KMeans phụ thuộc vào số cụm K
+    - Chưa cá nhân hóa hoàn toàn theo user
 
-    st.markdown("""
     ### 🚀 Hướng cải thiện
-    - Tuning số cụm K
-    - Dùng DBSCAN / Hierarchical Clustering
+    - Tuning số cụm K (Elbow Method)
+    - Thử DBSCAN hoặc Hierarchical Clustering
+    - Kết hợp Recommendation System nâng cao
     """)
