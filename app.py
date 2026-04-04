@@ -2,9 +2,9 @@ import streamlit as st
 from side1 import sidebar_navigation
 from utils.loader import load_data, load_model
 
-from pages.eda import show_eda
-from pages.recommend import show_recommend
-from pages.evaluation import show_evaluation
+from my_pages.eda import show_eda
+from my_pages.recommend import show_recommend
+from my_pages.evaluation import show_evaluation
 
 # CONF
 st.set_page_config(page_title="Food Recommendation", layout="wide")
