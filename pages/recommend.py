@@ -179,8 +179,15 @@ def show_recommend(df, kmeans, scaler):
                 ]
         
                 fig, ax = plt.subplots()
-                ax.pie(values, labels=labels, autopct='%1.1f%%')
-                ax.set_title("Tỷ lệ dinh dưỡng")
+                # ax.pie(values, labels=labels, autopct='%1.1f%%')
+                ax.pie(
+                    values,
+                    labels=labels,
+                    autopct=autopct_func,
+                    startangle=90
+                )
+                ax.axis('equal')  # hình tròn đẹp
+                #ax.set_title("Tỷ lệ dinh dưỡng")
         
                 st.pyplot(fig)
         
