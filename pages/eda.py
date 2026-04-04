@@ -10,7 +10,8 @@ def show_eda(df):
     # ======================
     st.markdown("""
     **👨‍🎓 Sinh viên:** Nguyễn Phước Bình
-    **🆔 MSSV:** 21T1020117  
+    
+    **🆔 MSSV:** 21T1020117.  
 
     ---
     ### 🎯 Mục tiêu
