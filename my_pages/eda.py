@@ -63,7 +63,7 @@ def show_eda(df):
     # ======================
     st.subheader("📈 Phân phối Calories")
 
-    fig, ax = plt.subplots(figsize=(7, 4))
+    fig, ax = plt.subplots(figsize=(6, 3))
     df['Calories'].hist(bins=50, ax=ax)
     ax.set_xlabel("Calories")
     ax.set_ylabel("Số lượng món ăn")
@@ -103,7 +103,7 @@ def show_eda(df):
     # ======================
     st.subheader("📊 Ma trận tương quan")
 
-    fig, ax = plt.subplots(figsize=(8,6))
+    fig, ax = plt.subplots(figsize=(6,3))
 
     sns.heatmap(
         df[['Calories','FatContent','ProteinContent',
