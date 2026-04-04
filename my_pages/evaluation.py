@@ -65,22 +65,26 @@ def show_evaluation(df, scaler, kmeans):
     
     Để giải quyết vấn đề này, em sử dụng **StandardScaler** từ thư viện `sklearn.preprocessing`.
     
-    👉 Công thức chuẩn hóa:
+  
     
     """)
     
-    st.latex(r"""
-    X' = \frac{X - \mu}{\sigma}
+    st.markdown("""
+   
+    
+      👉 Công thức chuẩn hóa:
+    
     """)
+    
+    st.latex(r"X' = \frac{X - \mu}{\sigma}")
     
     st.markdown("""
     Trong đó:
-    """)
-    st.latex(r"\mu: \text{giá trị trung bình}")
-    st.latex(r"\sigma: \text{độ lệch chuẩn}") 
     
-    ---
-    st.markdown("""
+    - **\( \mu \)**: Giá trị trung bình của đặc trưng  
+    - **\( \sigma \)**: Độ lệch chuẩn  
+    
+    
     ### 🎯 Ý nghĩa
     
     - Đưa các đặc trưng về cùng thang đo (mean = 0, std = 1)  
