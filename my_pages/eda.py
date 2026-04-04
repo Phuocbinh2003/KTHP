@@ -119,7 +119,7 @@ def show_eda(df):
     # ======================
     # HIỂN THỊ ẢNH LOCAL
     # ======================
-    st.image("pages/images/bmr.jpg", caption="Công thức tính BMR", use_container_width=True)
+    st.image("my_pages/images/bmr.jpg", caption="Công thức tính BMR", use_container_width=True)
     
     # ======================
     # CÔNG THỨC
