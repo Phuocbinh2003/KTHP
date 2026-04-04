@@ -72,19 +72,19 @@ def show_evaluation(df, scaler, kmeans):
     st.markdown("""
     ### ⚙️ Chuẩn hóa dữ liệu
     
-    👉 Công thức chuẩn hóa:
+    👉 Công thức:
     """)
     
     st.latex(r"X_{scaled} = \frac{X - \mu}{\sigma}")
     
     st.markdown("""
-    Trong đó:
-    """)
-    st.latex(r" \frac{  \mu}")
-    - **\( \mu \)**: Giá trị trung bình của đặc trưng  
+    ### 📌 Giải thích:
+    
+    - **\( \mu \)**: Trung bình của đặc trưng  
     - **\( \sigma \)**: Độ lệch chuẩn  
     
-    ---
+    
+    """)
     st.markdown("""
     ### 🎯 Ý nghĩa
     
