@@ -103,7 +103,7 @@ def show_eda(df):
     # ======================
     st.subheader("📊 Ma trận tương quan")
 
-    fig, ax = plt.subplots(figsize=(6,3))
+    fig, ax = plt.subplots(figsize=(8,6))
 
     sns.heatmap(
         df[['Calories','FatContent','ProteinContent',
