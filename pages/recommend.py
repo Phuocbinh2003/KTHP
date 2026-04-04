@@ -147,7 +147,8 @@ def show_recommend(df, kmeans, scaler):
         st.success(f"👉 Gợi ý {len(result)} món phù hợp (đã xếp hạng).")
 
      
-        top_n = result.head(5)  # lấy 5 món đẹp hơn
+        top_pool = result.head(50)   # lấy top 50 gần nhất
+        top_n = top_pool.sample(5)   # random 5 món
         
         for i, row in top_n.iterrows():
         
