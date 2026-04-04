@@ -163,12 +163,16 @@ def show_recommend(df, kmeans, scaler):
             # ======================
             # 🥧 BIỂU ĐỒ TRÒN
             # ======================
+            import plotly.express as px
+            import pandas as pd
+            
             with col1:
+            
                 labels = [
                     'Calories', 'Fat', 'Protein',
                     'Carbs', 'Sugar', 'Sodium'
                 ]
-        
+            
                 values = [
                     row['Calories'],
                     row['FatContent'],
@@ -177,20 +181,32 @@ def show_recommend(df, kmeans, scaler):
                     row['SugarContent'],
                     row['SodiumContent']
                 ]
-        
-                fig, ax = plt.subplots()
-                # ax.pie(values, labels=labels, autopct='%1.1f%%')
-                ax.pie(
-                    values,
-                    labels=labels,
-                    autopct=autopct_func,
-                    startangle=90
+            
+                df_pie = pd.DataFrame({
+                    "Nutrient": labels,
+                    "Value": values
+                })
+            
+                # lọc <5% cho đỡ rối
+                total = df_pie["Value"].sum()
+                df_pie["Percent"] = df_pie["Value"] / total * 100
+                df_pie = df_pie[df_pie["Percent"] >= 5]
+            
+                fig = px.pie(
+                    df_pie,
+                    names="Nutrient",
+                    values="Value",
+                    hole=0.4,  # donut chart 🔥
+                    title="Tỷ lệ dinh dưỡng"
                 )
-                ax.axis('equal')  # hình tròn đẹp
-                #ax.set_title("Tỷ lệ dinh dưỡng")
-        
-                st.pyplot(fig)
-        
+            
+                fig.update_traces(
+                    textinfo='percent+label',
+                    hovertemplate="<b>%{label}</b><br>%{percent:.1%}<br>Value: %{value}"
+                )
+            
+                st.plotly_chart(fig, use_container_width=True)
+                    
             # ======================
             # 🖼️ HÌNH ẢNH
             # ======================
