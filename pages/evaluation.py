@@ -64,8 +64,8 @@ def show_evaluation(df, scaler, kmeans):
     # ======================
     # EXPLAINED VARIANCE
     # ======================
-    st.write("📊 Explained Variance (PCA):")
-    st.write(pca.explained_variance_ratio_)
+    #st.write("📊 Explained Variance (PCA):")
+    #st.write(pca.explained_variance_ratio_)
 
     # ======================
     # NHẬN XÉT
