@@ -65,8 +65,8 @@ def show_eda(df):
 
     fig, ax = plt.subplots(figsize=(5, 2))
     df['Calories'].hist(bins=50, ax=ax)
-    ax.set_xlabel("Calories",labelsize=6)
-    ax.set_ylabel("Số lượng món ăn",labelsize=6)
+    ax.set_xlabel("Calories",fontsize=6)
+    ax.set_ylabel("Số lượng món ăn",fontsize=6)
     ax.tick_params(axis='both', labelsize=5)  
     st.pyplot(fig)
 
