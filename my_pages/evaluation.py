@@ -42,8 +42,52 @@ def show_evaluation(df, scaler, kmeans):
     st.subheader("📦 Tiền xử lý dữ liệu")
 
     X = df[features].dropna()
-
-    st.write(f"Số lượng mẫu sử dụng: {X.shape[0]}")
+    
+    st.write(f"📊 Số lượng mẫu sau khi loại bỏ giá trị thiếu: {X.shape[0]}")
+    
+    st.markdown("""
+    ### 🔧 Chuẩn hóa dữ liệu
+    
+    Trong bài toán này, các đặc trưng dinh dưỡng như **Calories, Fat, Protein, Carbohydrate, Sugar, Sodium**  
+    có đơn vị và thang đo rất khác nhau.
+    
+    👉 Ví dụ:
+    - Calories có thể lên đến hàng nghìn  
+    - Fat/Protein chỉ vài chục gram  
+    
+    ❗ Nếu không chuẩn hóa:
+    - Các đặc trưng lớn (như Calories) sẽ **chi phối mô hình KMeans**
+    - Làm sai lệch kết quả phân cụm
+    
+    ---
+    
+    ### ⚙️ Phương pháp sử dụng
+    
+    Để giải quyết vấn đề này, em sử dụng **StandardScaler** từ thư viện `sklearn.preprocessing`.
+    
+    👉 Công thức chuẩn hóa:
+    
+    """)
+    
+    st.latex(r"""
+    X' = \frac{X - \mu}{\sigma}
+    """)
+    
+    st.markdown("""
+    Trong đó:
+    - \( \mu \): giá trị trung bình  
+    - \( \sigma \): độ lệch chuẩn  
+    
+    ---
+    
+    ### 🎯 Ý nghĩa
+    
+    - Đưa các đặc trưng về cùng thang đo (mean = 0, std = 1)  
+    - Giúp mô hình KMeans hoạt động chính xác hơn  
+    - Tránh việc một đặc trưng "áp đảo" các đặc trưng khác  
+    
+    👉 Đây là bước **bắt buộc** trong các bài toán clustering.
+    """)
 
     # scale (QUAN TRỌNG)
     X_scaled = scaler.transform(X.values)
