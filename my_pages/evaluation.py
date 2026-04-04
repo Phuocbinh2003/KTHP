@@ -75,8 +75,8 @@ def show_evaluation(df, scaler, kmeans):
     
     st.markdown("""
     Trong đó:
-    - **\( \mu \)**: Giá trị trung bình của đặc trưng  
-    - **\( \sigma \)**: Độ lệch chuẩn  
+    st.latex(r"\mu: \text{giá trị trung bình}")
+    st.latex(r"\sigma: \text{độ lệch chuẩn}") 
     
     ---
     
