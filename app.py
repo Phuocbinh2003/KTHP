@@ -17,7 +17,7 @@ kmeans, scaler = load_model()
 page = sidebar_navigation()
 
 # ROUTING
-if page == "1. Giới thiệu & EDA":
+if page == "1. Giới thiệu & EDA.":
     show_eda(df)
 
 elif page == "2. Gợi ý thực đơn":
