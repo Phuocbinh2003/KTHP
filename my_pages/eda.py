@@ -63,17 +63,13 @@ def show_eda(df):
     # ======================
     st.subheader("📈 Phân phối Calories")
 
-    fig, ax = plt.subplots((8,6))
+    fig, ax = plt.subplots()
+    df['Calories'].hist(bins=50, ax=ax)
+    ax.set_xlabel("Calories")
+    ax.set_ylabel("Số lượng món ăn")
+    
+    st.pyplot(fig)
 
-    ax.hist(df['Calories'].dropna(), bins=50)
-
-    ax.set_xlabel("Calories", fontsize=8)
-    ax.set_ylabel("Count", fontsize=8)
-    ax.tick_params(axis='both', labelsize=7)
-
-    col1, col2, col3 = st.columns([2,1,2])
-    with col2:
-        st.pyplot(fig, width=550)
     st.markdown("""
     🔎 **Nhận xét:**
 
@@ -89,7 +85,7 @@ def show_eda(df):
 
     fig, ax = plt.subplots()
     sns.boxplot(data=df[['Calories','FatContent','ProteinContent','CarbohydrateContent']], ax=ax)
-     
+
     st.pyplot(fig)
 
     st.markdown("""
@@ -116,7 +112,7 @@ def show_eda(df):
         cmap="coolwarm",
         ax=ax
     )
-    
+
     st.pyplot(fig)
 
     st.markdown("""
