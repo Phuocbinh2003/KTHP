@@ -9,14 +9,16 @@ def show_eda(df):
     # GIỚI THIỆU
     # ======================
     st.markdown("""
-    **👨‍🎓 Sinh viên:** Nguyễn Phước Bình  .
+    **👨‍🎓 Sinh viên:** Nguyễn Phước Bình
     **🆔 MSSV:** 21T1020117  
 
     ---
     ### 🎯 Mục tiêu
     Xây dựng hệ thống gợi ý thực đơn dựa trên:
-    - Chỉ số cơ thể (BMI).
+    - Chỉ số cơ thể (BMR).
     - Bệnh lý nền (Tiểu đường, Cao huyết áp)
+    - Giới tính,Tuổi,mức vận động
+    
 
     ### 💡 Giá trị thực tiễn
     - Hỗ trợ người dùng lựa chọn món ăn phù hợp sức khỏe  
