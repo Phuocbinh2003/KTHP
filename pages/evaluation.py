@@ -6,27 +6,46 @@ import plotly.express as px
 
 
 def show_evaluation(df, scaler, kmeans):
-    st.title("📊 Đánh giá mô hình KMeans")
+
+    st.title("📊 Đánh giá mô hình KMeans Clustering")
+
+    st.markdown("""
+    Trang này nhằm đánh giá hiệu quả của mô hình **KMeans Clustering** 
+    trong việc phân nhóm các món ăn dựa trên đặc trưng dinh dưỡng.
+
+    👉 Mục tiêu:
+    - Kiểm tra chất lượng phân cụm
+    - Trực quan hóa dữ liệu
+    - Phân tích điểm mạnh và hạn chế của mô hình
+    """)
 
     # ======================
-    # FEATURES (PHẢI ĐÚNG NHƯ LÚC TRAIN)
+    # FEATURES
     # ======================
+    st.subheader("🔍 Đặc trưng sử dụng")
+
     features = [
         'Calories',
         'FatContent',
         'CarbohydrateContent',
         'ProteinContent',
-        
         'SugarContent',
         'SodiumContent'
     ]
 
+    st.write("Các đặc trưng dinh dưỡng được sử dụng để phân cụm:")
+    st.write(features)
+
     # ======================
     # DATA
     # ======================
+    st.subheader("📦 Tiền xử lý dữ liệu")
+
     X = df[features].dropna()
 
-    # ❗ FIX lỗi feature name
+    st.write(f"Số lượng mẫu sử dụng: {X.shape[0]}")
+
+    # scale (QUAN TRỌNG)
     X_scaled = scaler.transform(X.values)
 
     # predict cluster
@@ -35,14 +54,35 @@ def show_evaluation(df, scaler, kmeans):
     # ======================
     # METRIC
     # ======================
+    st.subheader("📈 Đánh giá bằng Silhouette Score")
+
     score = silhouette_score(X_scaled, labels)
 
-    st.metric("📈 Silhouette Score", round(score, 3))
+    st.metric("Silhouette Score", round(score, 3))
+
+    st.markdown("""
+    **Giải thích:**
+    - Giá trị nằm trong khoảng [-1, 1]
+    - Gần 1 → cụm tách biệt tốt
+    - Gần 0 → các cụm chồng lấn
+    - Âm → phân cụm sai
+
+    👉 Đây là thước đo nội tại (unsupervised), không phản ánh hoàn toàn chất lượng gợi ý thực tế.
+    """)
 
     # ======================
-    # PCA → 3D
+    # PCA 3D
     # ======================
-    st.subheader("🌐 Visualization 3D (Interactive)")
+    st.subheader("🌐 Trực quan hóa không gian 3D")
+
+    st.markdown("""
+    Do dữ liệu ban đầu có **6 chiều**, ta sử dụng **PCA (Principal Component Analysis)** 
+    để giảm chiều xuống 3D nhằm trực quan hóa.
+
+    👉 Lưu ý:
+    - PCA giúp giữ lại phần lớn thông tin quan trọng
+    - Nhưng vẫn có thể làm mất một phần dữ liệu
+    """)
 
     pca = PCA(n_components=3)
     X_pca = pca.fit_transform(X_scaled)
@@ -55,8 +95,8 @@ def show_evaluation(df, scaler, kmeans):
         y=X_pca[:, 1],
         z=X_pca[:, 2],
         color=labels.astype(str),
-        hover_name=df.loc[X.index, 'Name'],  # hiển thị tên món
-        title="KMeans Clustering (3D Interactive)"
+        hover_name=df.loc[X.index, 'Name'],
+        title="KMeans Clustering Visualization (3D)"
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -64,25 +104,63 @@ def show_evaluation(df, scaler, kmeans):
     # ======================
     # EXPLAINED VARIANCE
     # ======================
-    #st.write("📊 Explained Variance (PCA):")
-    #st.write(pca.explained_variance_ratio_)
+    st.subheader("📊 Mức độ giữ lại thông tin (PCA)")
+
+    variance = pca.explained_variance_ratio_
+
+    st.write("Tỷ lệ phương sai giữ lại của từng thành phần:")
+    st.write(variance)
+
+    st.write(f"Tổng phương sai giữ lại: {round(sum(variance), 3)}")
 
     # ======================
-    # NHẬN XÉT
+    # NHẬN XÉT CHUYÊN SÂU
     # ======================
-    st.markdown("""
-    ### 🧠 Nhận xét x
-    - Dữ liệu gốc có 6 chiều → sử dụng PCA để giảm xuống 3D
-    - Các cụm được phân tách tương đối rõ ràng
-    - Silhouette Score phản ánh chất lượng phân cụm
+    st.subheader("🧠 Phân tích & Nhận xét")
+
+    st.markdown(f"""
+    ### ✅ Điểm mạnh
+    - Mô hình có khả năng **phân nhóm món ăn theo dinh dưỡng**
+    - Silhouette Score = **{round(score,3)}** cho thấy mức độ phân tách ở mức **khá**
+    - PCA cho thấy các cụm có xu hướng tách biệt trong không gian 3D
+    - Có thể áp dụng tốt cho hệ thống gợi ý thực đơn
 
     ### ⚠️ Hạn chế
-    - PCA làm mất một phần thông tin
-    - KMeans phụ thuộc vào số cụm K
-    - Chưa cá nhân hóa hoàn toàn theo user
+    - KMeans yêu cầu xác định trước số cụm K
+    - Nhạy với outliers và phân phối dữ liệu
+    - PCA làm mất một phần thông tin gốc
+    - Chưa phản ánh hoàn toàn nhu cầu cá nhân (BMI, bệnh lý)
+
+    ### ❗ Vấn đề thực tế
+    - Silhouette Score không phản ánh trực tiếp "món ăn có phù hợp người dùng không"
+    - Bài toán này cần kết hợp thêm **Rule-based (y tế)**
 
     ### 🚀 Hướng cải thiện
-    - Tuning số cụm K (Elbow Method)
-    - Thử DBSCAN hoặc Hierarchical Clustering
-    - Kết hợp Recommendation System nâng cao
+    - Tối ưu số cụm K bằng **Elbow Method**
+    - Thử các thuật toán khác:
+        - DBSCAN (tự động cụm)
+        - Hierarchical Clustering
+    - Kết hợp:
+        - Clustering + Rule-based (bệnh lý)
+        - Clustering + Recommendation System
+    - Thêm feature:
+        - BMI
+        - Độ tuổi
+        - Mục tiêu (giảm/tăng cân)
+    """)
+
+    # ======================
+    # KẾT LUẬN
+    # ======================
+    st.subheader("🎯 Kết luận")
+
+    st.markdown("""
+    Mô hình KMeans đóng vai trò **phân nhóm món ăn**, không phải dự đoán trực tiếp.
+
+    👉 Hệ thống hoàn chỉnh gồm:
+    1. Clustering → nhóm món ăn
+    2. Rule-based → lọc theo bệnh lý
+    3. Distance ranking → chọn món phù hợp nhất
+
+    → Đây là cách tiếp cận **Hybrid Recommendation System**
     """)
