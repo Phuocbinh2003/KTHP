@@ -144,7 +144,7 @@ def show_recommend(df, kmeans, scaler):
         # ======================
         # OUTPUT
         # ======================
-        st.success(f"👉 Gợi ý {len(result)} món phù hợp (đã xếp hạng)")
+        st.success(f"👉 Gợi ý {len(result)} món phù hợp (đã xếp hạng).")
 
         import matplotlib.pyplot as plt
         import pandas as pd
