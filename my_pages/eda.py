@@ -225,7 +225,7 @@ def show_eda(df):
     ---
     ## 🚀 Hướng phát triển
 
-    - Thêm dữ liệu người dùng (BMI, tuổi, mục tiêu)  
+    - Thêm dữ liệu người dùng 
     - Tối ưu KMeans (Elbow Method)  
     - Áp dụng Deep Learning / Recommender nâng cao  
     - Triển khai thành hệ thống thực tế  
