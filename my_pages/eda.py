@@ -64,12 +64,16 @@ def show_eda(df):
     st.subheader("📈 Phân phối Calories")
 
     fig, ax = plt.subplots(figsize=(4, 2.5))
-    df['Calories'].hist(bins=50, ax=ax)
-    ax.set_xlabel("Calories",fontsize=5)
-    ax.set_ylabel("Số lượng món ăn",fontsize=5)
-    ax.tick_params(axis='both', labelsize=4)  
-    st.pyplot(fig)
 
+    ax.hist(df['Calories'].dropna(), bins=50)
+
+    ax.set_xlabel("Calories", fontsize=8)
+    ax.set_ylabel("Count", fontsize=8)
+    ax.tick_params(axis='both', labelsize=7)
+
+    col1, col2, col3 = st.columns([2,1,2])
+    with col2:
+        st.pyplot(fig, width=350)
     st.markdown("""
     🔎 **Nhận xét:**
 
