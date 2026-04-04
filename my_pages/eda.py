@@ -83,9 +83,9 @@ def show_eda(df):
     # ======================
     st.subheader("📦 So sánh các thành phần dinh dưỡng")
 
-    fig, ax = plt.subplots(figsize=(4, 2.5))
+    fig, ax = plt.subplots()
     sns.boxplot(data=df[['Calories','FatContent','ProteinContent','CarbohydrateContent']], ax=ax)
-    ax.tick_params(axis='both', labelsize=4)  
+     
     st.pyplot(fig)
 
     st.markdown("""
@@ -103,7 +103,7 @@ def show_eda(df):
     # ======================
     st.subheader("📊 Ma trận tương quan")
 
-    fig, ax = plt.subplots(figsize=(6,4))
+    fig, ax = plt.subplots(figsize=(8,6))
 
     sns.heatmap(
         df[['Calories','FatContent','ProteinContent',
@@ -112,7 +112,7 @@ def show_eda(df):
         cmap="coolwarm",
         ax=ax
     )
-    ax.tick_params(axis='both', labelsize=4)  
+    
     st.pyplot(fig)
 
     st.markdown("""
