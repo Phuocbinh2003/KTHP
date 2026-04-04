@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def show_eda(df):
-    st.title("🍽️ Hệ thống gợi ý thực đơn thông minh")
+    st.title("🍽️ APP gợi ý thực đơn")
 
     # ======================
     # GIỚI THIỆU
@@ -11,7 +11,7 @@ def show_eda(df):
     st.markdown("""
     **👨‍🎓 Sinh viên:** Nguyễn Phước Bình
     
-    **🆔 MSSV:** 21T1020117.  
+    **🆔 MSSV:** 21T1020117
 
     ---
     ### 🎯 Mục tiêu
