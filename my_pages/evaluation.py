@@ -70,13 +70,12 @@ def show_evaluation(df, scaler, kmeans):
     """)
     
     st.markdown("""
-   
+    ### ⚙️ Chuẩn hóa dữ liệu
     
-      👉 Công thức chuẩn hóa:
-    
+    👉 Công thức chuẩn hóa:
     """)
     
-    st.latex(r"X' = \frac{X - \mu}{\sigma}")
+    st.latex(r"X_{scaled} = \frac{X - \mu}{\sigma}")
     
     st.markdown("""
     Trong đó:
@@ -84,14 +83,15 @@ def show_evaluation(df, scaler, kmeans):
     - **\( \mu \)**: Giá trị trung bình của đặc trưng  
     - **\( \sigma \)**: Độ lệch chuẩn  
     
+    ---
     
     ### 🎯 Ý nghĩa
     
-    - Đưa các đặc trưng về cùng thang đo (mean = 0, std = 1)  
-    - Giúp mô hình KMeans hoạt động chính xác hơn  
+    - Đưa các đặc trưng về cùng thang đo (**mean = 0, std = 1**)  
+    - Giúp mô hình **KMeans** hoạt động chính xác hơn  
     - Tránh việc một đặc trưng "áp đảo" các đặc trưng khác  
     
-    👉 Đây là bước **bắt buộc** trong các bài toán clustering.
+    👉 Đây là bước **rất quan trọng** trong các bài toán *clustering*.
     """)
 
     # scale (QUAN TRỌNG)
