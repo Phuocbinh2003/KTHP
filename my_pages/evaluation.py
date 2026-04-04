@@ -80,8 +80,8 @@ def show_evaluation(df, scaler, kmeans):
     st.markdown("""
     ### 📌 Giải thích:
     """)
-    st.latex(r"{\mu}") #: Trung bình của đặc trưng  
-    st.latex(r"{\sigma}") #: Độ lệch chuẩn  
+    st.latex(r"\mu: \text{Trung bình của đặc trưng}")
+    st.latex(r"\sigma: \text{Độ lệch chuẩn}")
     
     
     
