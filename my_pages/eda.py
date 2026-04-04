@@ -63,7 +63,7 @@ def show_eda(df):
     # ======================
     st.subheader("📈 Phân phối Calories")
 
-    fig, ax = plt.subplots(figsize=(4, 2.5))
+    fig, ax = plt.subplots()
 
     ax.hist(df['Calories'].dropna(), bins=50)
 
