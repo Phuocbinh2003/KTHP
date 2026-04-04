@@ -76,7 +76,7 @@ def show_evaluation(df, scaler, kmeans):
     """)
     
     st.latex(r"X_{scaled} = \frac{X - \mu}{\sigma}")
-    st.latex(r"\frac{\mu}")
+    st.latex(r"{\mu}")
     st.markdown("""
     ### 📌 Giải thích:
     
