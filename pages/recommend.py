@@ -188,7 +188,7 @@ def show_recommend(df, kmeans, scaler):
                 # lọc <5% cho đỡ rối
                 total = df_pie["Value"].sum()
                 df_pie["Percent"] = df_pie["Value"] / total * 100
-                df_pie = df_pie[df_pie["Percent"] >= 5]
+                #df_pie = df_pie[df_pie["Percent"] >= 5]
             
                 fig = px.pie(
                     df_pie,
