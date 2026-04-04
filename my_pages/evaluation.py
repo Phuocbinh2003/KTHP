@@ -75,11 +75,12 @@ def show_evaluation(df, scaler, kmeans):
     
     st.markdown("""
     Trong đó:
+    """)
     st.latex(r"\mu: \text{giá trị trung bình}")
     st.latex(r"\sigma: \text{độ lệch chuẩn}") 
     
     ---
-    
+    st.markdown("""
     ### 🎯 Ý nghĩa
     
     - Đưa các đặc trưng về cùng thang đo (mean = 0, std = 1)  
