@@ -146,9 +146,7 @@ def show_recommend(df, kmeans, scaler):
         # ======================
         st.success(f"👉 Gợi ý {len(result)} món phù hợp (đã xếp hạng).")
 
-        import matplotlib.pyplot as plt
-        import pandas as pd
-
+     
         top_n = result.head(5)  # lấy 5 món đẹp hơn
         
         for i, row in top_n.iterrows():
