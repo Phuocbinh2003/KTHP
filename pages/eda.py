@@ -99,11 +99,40 @@ def show_eda(df):
     # ======================
     # TOP MÓN
     # ======================
-    st.subheader("🔥 Top món ăn nhiều Calories")
+    #st.subheader("🔥 Top món ăn nhiều Calories")
 
-    top_cal = df.sort_values(by='Calories', ascending=False).head(10)
-    st.dataframe(top_cal[['Name','Calories']])
+    #top_cal = df.sort_values(by='Calories', ascending=False).head(10)
+    #st.dataframe(top_cal[['Name','Calories']])
+    st.subheader("🧠 BMR là gì?")
 
+    st.markdown("""
+    **BMR (Basal Metabolic Rate)** là lượng năng lượng cơ thể tiêu hao khi nghỉ ngơi hoàn toàn  
+    (dù không vận động, cơ thể vẫn cần năng lượng để duy trì các chức năng sống như hô hấp, tuần hoàn,...)
+    
+    👉 BMR phụ thuộc vào:
+    - Giới tính
+    - Cân nặng
+    - Chiều cao
+    - Độ tuổi
+    """)
+    
+    # ======================
+    # HIỂN THỊ ẢNH LOCAL
+    # ======================
+    st.image("pages/images/bmr.jpg", caption="Công thức tính BMR", use_container_width=True)
+    
+    # ======================
+    # CÔNG THỨC
+    # ======================
+    st.subheader("📐 Công thức tính BMR")
+    
+    st.latex(r"""
+    \textbf{Nam: } BMR = 88.36 + (13.4 \times weight) + (4.8 \times height) - (5.7 \times age)
+    """)
+    
+    st.latex(r"""
+    \textbf{Nữ: } BMR = 447.6 + (9.2 \times weight) + (3.1 \times height) - (4.3 \times age)
+    """)
     # ======================
     # KẾT LUẬN
     # ======================
