@@ -6,7 +6,7 @@ from pages.eda import show_eda
 from pages.recommend import show_recommend
 from pages.evaluation import show_evaluation
 
-# CONFI
+# CONF
 st.set_page_config(page_title="Food Recommendation", layout="wide")
 
 # LOAD
