@@ -73,7 +73,7 @@ def show_eda(df):
 
     col1, col2, col3 = st.columns([2,1,2])
     with col2:
-        st.pyplot(fig, width=350)
+        st.pyplot(fig, width=550)
     st.markdown("""
     🔎 **Nhận xét:**
 
