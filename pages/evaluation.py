@@ -104,14 +104,14 @@ def show_evaluation(df, scaler, kmeans):
     # ======================
     # EXPLAINED VARIANCE
     # ======================
-    st.subheader("📊 Mức độ giữ lại thông tin (PCA)")
+    #st.subheader("📊 Mức độ giữ lại thông tin (PCA)")
 
-    variance = pca.explained_variance_ratio_
+    #variance = pca.explained_variance_ratio_
 
-    st.write("Tỷ lệ phương sai giữ lại của từng thành phần:")
-    st.write(variance)
+    #st.write("Tỷ lệ phương sai giữ lại của từng thành phần:")
+    #st.write(variance)
 
-    st.write(f"Tổng phương sai giữ lại: {round(sum(variance), 3)}")
+    #st.write(f"Tổng phương sai giữ lại: {round(sum(variance), 3)}")
 
     # ======================
     # NHẬN XÉT CHUYÊN SÂU
@@ -128,25 +128,20 @@ def show_evaluation(df, scaler, kmeans):
     ### ⚠️ Hạn chế
     - KMeans yêu cầu xác định trước số cụm K
     - Nhạy với outliers và phân phối dữ liệu
-    - PCA làm mất một phần thông tin gốc
-    - Chưa phản ánh hoàn toàn nhu cầu cá nhân (BMI, bệnh lý)
+    - Chưa phản ánh hoàn toàn nhu cầu cá nhân (BMR, bệnh lý...)
 
     ### ❗ Vấn đề thực tế
     - Silhouette Score không phản ánh trực tiếp "món ăn có phù hợp người dùng không"
-    - Bài toán này cần kết hợp thêm **Rule-based (y tế)**
+    - Bài toán này cần kết hợp thêm **Rule-based**
 
     ### 🚀 Hướng cải thiện
-    - Tối ưu số cụm K bằng **Elbow Method**
     - Thử các thuật toán khác:
         - DBSCAN (tự động cụm)
         - Hierarchical Clustering
     - Kết hợp:
-        - Clustering + Rule-based (bệnh lý)
+        - Clustering + Rule-based 
         - Clustering + Recommendation System
-    - Thêm feature:
-        - BMI
-        - Độ tuổi
-        - Mục tiêu (giảm/tăng cân)
+    
     """)
 
     # ======================
